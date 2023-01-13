@@ -5,7 +5,8 @@ set -x
 
 THIS_DIR="$PWD"
 
-PYVER=3.9.0
+# Should use same python version on host #
+PYVER=3.10.0
 SRCDIR=src/Python-$PYVER
 
 COMMON_ARGS="--arch ${ARCH:-arm} --api ${ANDROID_API:-21}"
@@ -26,7 +27,7 @@ patch -Np1 -i ./Android/unversioned-libpython.patch
 autoreconf -ifv
 ./Android/build_deps.py $COMMON_ARGS
 ./Android/configure.py $COMMON_ARGS --prefix=/usr "$@"
-make
+make -j
 make install DESTDIR="$THIS_DIR/build"
 popd
 cp -r $SRCDIR/Android/sysroot/usr/share/terminfo build/usr/share/
