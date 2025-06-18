@@ -63,7 +63,8 @@ class BZip2(Package):
         self.run(['install', '-Dm644', 'bzlib.h', '-t', str(SYSROOT / 'usr' / 'include')])
 
 class GDBM(Package):
-    source = 'https://ftp.gnu.org/gnu/gdbm/gdbm-1.18.1.tar.gz'
+    #source = 'https://ftp.gnu.org/gnu/gdbm/gdbm-1.18.1.tar.gz'
+    source = 'https://mirror.ihost.md/gnu/gdbm/gdbm-1.25.tar.gz'
     configure_args = ['--enable-libgdbm-compat']
 
 class LibFFI(Package):
@@ -81,7 +82,8 @@ class NCurses(Package):
     configure_args = ['--without-ada', '--enable-widec', '--without-debug', '--without-cxx-binding', '--disable-stripping']
 
 class OpenSSL(Package):
-    source = 'https://www.openssl.org/source/openssl-1.1.1h.tar.gz'
+    #source = 'https://www.openssl.org/source/openssl-1.1.1h.tar.gz'
+    source = 'https://www.openssl.org/source/openssl-3.5.0.tar.gz'
 
     def configure(self):
         # OpenSSL handles NDK internal paths by itself
@@ -106,7 +108,8 @@ class OpenSSL(Package):
         self.run(['make', 'install_sw', 'install_ssldirs', f'DESTDIR={SYSROOT}'])
 
 class Readline(Package):
-    source = 'https://ftp.gnu.org/gnu/readline/readline-8.0.tar.gz'
+    #source = 'https://ftp.gnu.org/gnu/readline/readline-8.2.13.tar.gz'
+    source = 'https://ftp.sotirov-bg.net/pub/mirrors/gnu/readline/readline-8.2.13.tar.gz'
 
     # See the wcwidth() test in aclocal.m4. Tested on Android 6.0 and it's broken
     # XXX: wcwidth() is implemented in [1], which may be in Android P
@@ -118,7 +121,8 @@ class SQLite(Package):
     source = 'https://sqlite.org/2020/sqlite-autoconf-3330000.tar.gz'
 
 class XZ(Package):
-    source = 'https://tukaani.org/xz/xz-5.2.5.tar.xz'
+    #source = 'https://tukaani.org/xz/xz-5.2.5.tar.xz'
+    source = 'https://tukaani.org/xz/xz-5.8.1.tar.gz'
 
 class ZLib(Package):
     source = 'https://zlib.net/fossils/zlib-1.2.11.tar.gz'
@@ -139,7 +143,7 @@ class ZLib(Package):
         self.run(['make', 'libz.a'])
 
 def build_package(pkg: Package):
-    subprocess.check_call(['curl', '-fLO', pkg.source], cwd=BASE / 'deps')
+    subprocess.check_call(['curl', '-fkLO', pkg.source], cwd=BASE / 'deps')
     subprocess.check_call(['tar', '--no-same-owner', '-xf', os.path.basename(pkg.source)], cwd=BASE / 'deps')
 
     try:
