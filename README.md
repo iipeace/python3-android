@@ -13,6 +13,7 @@ Building requires:
 3. `python3.9` binary from Python 3.9.0 on the building host. It's recommended to use exactly that Python version, which can be installed via [pyenv](https://github.com/yyuu/pyenv). Don't forget to check that `python3.9` is available in $PATH.
 4. `tic` binary from ncurses 6.2 on the building host. Slightly newer or older version may also work but no guarantee.
 5. A case-sensitive filesystem. The default filesystem on Windows and macOS is case-insensitive, and building may fail.
+6. update the latest packages in Android/build_deps.py if build error occur
 
 Running requires:
 

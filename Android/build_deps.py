@@ -63,7 +63,6 @@ class BZip2(Package):
         self.run(['install', '-Dm644', 'bzlib.h', '-t', str(SYSROOT / 'usr' / 'include')])
 
 class GDBM(Package):
-    #source = 'https://ftp.gnu.org/gnu/gdbm/gdbm-1.18.1.tar.gz'
     source = 'https://mirror.ihost.md/gnu/gdbm/gdbm-1.25.tar.gz'
     configure_args = ['--enable-libgdbm-compat']
 
@@ -73,7 +72,7 @@ class LibFFI(Package):
     configure_args = ['--disable-builddir']
 
 class LibUUID(Package):
-    source = 'https://mirrors.edge.kernel.org/pub/linux/utils/util-linux/v2.36/util-linux-2.36.tar.xz'
+    source = 'https://mirrors.edge.kernel.org/pub/linux/utils/util-linux/v2.38/util-linux-2.38.tar.xz'
     configure_args = ['--disable-all-programs', '--enable-libuuid']
 
 class NCurses(Package):
@@ -82,7 +81,6 @@ class NCurses(Package):
     configure_args = ['--without-ada', '--enable-widec', '--without-debug', '--without-cxx-binding', '--disable-stripping']
 
 class OpenSSL(Package):
-    #source = 'https://www.openssl.org/source/openssl-1.1.1h.tar.gz'
     source = 'https://www.openssl.org/source/openssl-3.5.0.tar.gz'
 
     def configure(self):
@@ -108,7 +106,6 @@ class OpenSSL(Package):
         self.run(['make', 'install_sw', 'install_ssldirs', f'DESTDIR={SYSROOT}'])
 
 class Readline(Package):
-    #source = 'https://ftp.gnu.org/gnu/readline/readline-8.2.13.tar.gz'
     source = 'https://ftp.sotirov-bg.net/pub/mirrors/gnu/readline/readline-8.2.13.tar.gz'
 
     # See the wcwidth() test in aclocal.m4. Tested on Android 6.0 and it's broken
@@ -118,10 +115,9 @@ class Readline(Package):
     configure_args = ['bash_cv_wcwidth_broken=yes']
 
 class SQLite(Package):
-    source = 'https://sqlite.org/2020/sqlite-autoconf-3330000.tar.gz'
+    source = "https://www.sqlite.org/2024/sqlite-autoconf-3460000.tar.gz"
 
 class XZ(Package):
-    #source = 'https://tukaani.org/xz/xz-5.2.5.tar.xz'
     source = 'https://tukaani.org/xz/xz-5.8.1.tar.gz'
 
 class ZLib(Package):
