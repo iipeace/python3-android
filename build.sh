@@ -68,6 +68,25 @@ rm -f  "$BUILDDIR/usr/lib/libpython$PYSHORTVER.a"  # static library
 # Remove accidental path created by ensurepip during cross-compilation
 rm -rf "$BUILDDIR/home"
 
+# Remove test-only and demo C extension modules from lib-dynload
+find "$PYLIB/lib-dynload" \( \
+    -name "_test*.so" \
+    -o -name "_ctypes_test*.so" \
+    -o -name "_xxtestfuzz*.so" \
+    -o -name "xxlimited*.so" \
+    -o -name "xxsubtype*.so" \
+\) -delete
+
+# Remove development-only files not needed at runtime
+rm -rf "$BUILDDIR/usr/include"        # C headers (for extension building only)
+rm -rf "$BUILDDIR/usr/lib/pkgconfig"  # pkg-config files (for build systems only)
+
+# Remove build-tool binaries not needed at runtime on Android
+rm -f "$BUILDDIR/usr/bin/idle3"
+rm -f "$BUILDDIR/usr/bin/idle3.$PYSHORTVER"
+rm -f "$BUILDDIR/usr/bin/python$PYSHORTVER-config"
+rm -f "$BUILDDIR/usr/bin/python3-config"
+
 # Remove .opt-*.pyc files (only used with -O/-OO flags, not needed by default)
 find "$BUILDDIR" -name "*.opt-*.pyc" -delete
 # Remove orphaned __pycache__ entries for any .py files we deleted above
