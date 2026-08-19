@@ -63,20 +63,20 @@ class BZip2(Package):
         self.run(['install', '-Dm644', 'bzlib.h', '-t', str(SYSROOT / 'usr' / 'include')])
 
 class GDBM(Package):
-    source = 'https://mirror.ihost.md/gnu/gdbm/gdbm-1.25.tar.gz'
+    source = 'https://ftp.gnu.org/gnu/gdbm/gdbm-1.26.tar.gz'
     configure_args = ['--enable-libgdbm-compat']
 
 class LibFFI(Package):
-    source = 'https://github.com/libffi/libffi/releases/download/v3.3/libffi-3.3.tar.gz'
+    source = 'https://github.com/libffi/libffi/releases/download/v3.8.0/libffi-3.8.0.tar.gz'
     # libffi may fail to configure with Docker on WSL2 (#33)
     configure_args = ['--disable-builddir']
 
 class LibUUID(Package):
-    source = 'https://mirrors.edge.kernel.org/pub/linux/utils/util-linux/v2.38/util-linux-2.38.tar.xz'
+    source = 'https://mirrors.edge.kernel.org/pub/linux/utils/util-linux/v2.42/util-linux-2.42.tar.xz'
     configure_args = ['--disable-all-programs', '--enable-libuuid']
 
 class NCurses(Package):
-    source = 'https://invisible-mirror.net/archives/ncurses/ncurses-6.2.tar.gz'
+    source = 'https://invisible-mirror.net/archives/ncurses/ncurses-6.6.tar.gz'
     # Not stripping the binaries as there is no easy way to specify the strip program for Android
     configure_args = ['--without-ada', '--enable-widec', '--without-debug', '--without-cxx-binding', '--disable-stripping']
 
@@ -106,7 +106,7 @@ class OpenSSL(Package):
         self.run(['make', 'install_sw', 'install_ssldirs', f'DESTDIR={SYSROOT}'])
 
 class Readline(Package):
-    source = 'https://ftp.sotirov-bg.net/pub/mirrors/gnu/readline/readline-8.2.13.tar.gz'
+    source = 'https://ftp.gnu.org/gnu/readline/readline-8.3.tar.gz'
 
     # See the wcwidth() test in aclocal.m4. Tested on Android 6.0 and it's broken
     # XXX: wcwidth() is implemented in [1], which may be in Android P
@@ -115,13 +115,13 @@ class Readline(Package):
     configure_args = ['bash_cv_wcwidth_broken=yes']
 
 class SQLite(Package):
-    source = "https://www.sqlite.org/2024/sqlite-autoconf-3460000.tar.gz"
+    source = "https://www.sqlite.org/2026/sqlite-autoconf-3530400.tar.gz"
 
 class XZ(Package):
-    source = 'https://tukaani.org/xz/xz-5.8.1.tar.gz'
+    source = 'https://tukaani.org/xz/xz-5.8.3.tar.gz'
 
 class ZLib(Package):
-    source = 'https://zlib.net/fossils/zlib-1.2.11.tar.gz'
+    source = 'https://zlib.net/zlib-1.3.2.tar.gz'
 
     def configure(self):
         os.environ.update({
