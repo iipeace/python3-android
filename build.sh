@@ -6,7 +6,7 @@ set -x
 THIS_DIR="$PWD"
 
 # Should use same python version on host #
-PYVER=3.13.11
+PYVER=3.13.15
 SRCDIR=src/Python-$PYVER
 
 COMMON_ARGS="--arch ${ARCH:-arm} --api ${ANDROID_API:-21}"
